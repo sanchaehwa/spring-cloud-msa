@@ -6,18 +6,17 @@ Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA) 강�
 | Chapter | **진행 여부** |
 | --- | --- |
 | [Service Discovery](https://github.com/sanchaehwa/spring-cloud-msa/blob/main/doc/1.md) |✅|
-| API Gateway Service |  |
+| API Gateway Service, E-commerce Application  |  |
 | E-commerce 애플리케이션 |  |
-| Users Microservice - Part 1 |  |
-| Catalogs, Orders Microservice |  |
-| Users Microservice - Part 2 |  |
+| Users Microservice(1)|  |
+| Catalogs and Orders Microservice|  |
+| Users Microservice(2) |  |
 | Spring Config Server |  |
 | Spring Cloud Bus |  |
-| Encryption and Decryption |  |
-| 마이크로서비스간 통신 |  |
-| Kafka를 이용한 데이터 동기화 - Part 1 |  |
-| Kafka를 이용한 데이터 동기화 - Part 2 |  |
-| Resilience4J / Trace |  |
-| Monitoring |  |
-| Docker |  |
+| Microservice 간 통신 |  |
+| 데이터 동기화를 위한 Apache Kafka의 활용(1) |  |
+| 데이터 동기화를 위한 Apache Kafka의 활용(2)|  |
+| 장애 처리와 Microservice 분산 추적	 |  |
+| Microservice Monitoring |  |
+| 애플리케이션 배포를 위한 컨테이너 가상화	 |  |
 | Deployment |  |
