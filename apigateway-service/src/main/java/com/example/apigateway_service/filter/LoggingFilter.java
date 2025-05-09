@@ -3,6 +3,7 @@ package com.example.apigateway_service.filter;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.OrderedGatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -12,9 +13,9 @@ import reactor.core.publisher.Mono;
 @Component
 @Slf4j
 
-public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Config> {
+public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Config> {
 
-    public GlobalFilter() { //설정 클래스 등록
+    public LoggingFilter() { //설정 클래스 등록
         super(Config.class);
     }
 
@@ -22,7 +23,7 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
     public GatewayFilter apply(Config config) {
         //custom pre filter
 
-        return (exchange, chain) -> { //chain은 다음 필터로 넘기기위해 사용
+        GatewayFilter filter = new OrderedGatewayFilter((exchange, chain) ->{
             //요청 객체
             ServerHttpRequest request = exchange.getRequest();
             //응답 객체
@@ -30,20 +31,21 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
 
             //Filter Logging 작업
 
-            log.info("Global Filter baseMassage: {}",config.getBaseMessage()); //GlobalFilter는 공통처리
+            log.info("Logging Filter baseMassage: {} ",config.getBaseMessage());
             //요청
             if (config.isPreLogger()) {
-                log.info("Global Filter Start: request id -> {}",request.getId()); //GlobalFilter는 공통처리
+                log.info("Logging PRE Filter Start: request id -> {}",request.getId());
             }
 
             //Custom Post Filter
-            return chain.filter(exchange).then(Mono.fromRunnable(() -> { //비동기 방식의 서버를 지원할 때, 단일값 전달할때, 모노
+            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
                 //응답
                 if (config.isPostLogger()) {
-                    log.info("Global Filter End: response id -> {}",response.getStatusCode()); //GlobalFilter는 공통처리
+                    log.info("Loggin POST Filter End: response id -> {}",response.getStatusCode());
                 }
             }));
-        };
+        }, OrderedGatewayFilter.LOWEST_PRECEDENCE); //우선순위설정 - Gateway 내의 우선순위를 정하는것이고 체인 순서대로면 Client -> Handler -> Global 이순으로 작동함 :
+        return filter;
     }
 
     @Data
@@ -52,5 +54,6 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
         private String baseMessage;
         private boolean preLogger;
         private boolean postLogger;
+
     }
 }
