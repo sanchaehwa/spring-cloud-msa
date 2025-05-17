@@ -6,7 +6,7 @@ Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA) 강�
 | Chapter | **진행 여부** |
 | --- | --- |
 | [Service Discovery](https://github.com/sanchaehwa/spring-cloud-msa/blob/main/doc/1.md) |✅|
-| [API Gateway Service, E-commerce Application](https://github.com/sanchaehwa/spring-cloud-msa/blob/main/doc/2.md)  |➡️|
+| [API Gateway Service, E-commerce Application](https://github.com/sanchaehwa/spring-cloud-msa/blob/main/doc/2.md)  |✅||
 | E-commerce 애플리케이션 |  |
 | Users Microservice(1)|  |
 | Catalogs and Orders Microservice|  |
