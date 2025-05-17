@@ -20,3 +20,5 @@ Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA) 강�
 | Microservice Monitoring |  |
 | 애플리케이션 배포를 위한 컨테이너 가상화	 |  |
 | Deployment |  |
+### 시스템 구조도
+<img width="1193" alt="시스템 구조도" src="https://github.com/user-attachments/assets/8640f585-d403-40bd-8c4e-cbb3deefcf13" />
