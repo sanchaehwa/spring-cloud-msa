@@ -9,14 +9,14 @@ import lombok.Getter;
 public class UserSignUpRequest {
     private String name;
     private String email;
-    private String pwd;
+    private String password;
 
     public User toEntity(){
         return User
                 .builder()
                 .name(name)
                 .email(email)
-                .password(pwd)
+                .password(password)
                 .build();
     }
 

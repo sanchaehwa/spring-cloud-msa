@@ -1,5 +1,6 @@
 package com.example.user_service.domain;
 
+import com.example.user_service.model.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +29,11 @@ public class User {
     @Email(message = "이메일을 올바르게 입력해주세요")
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+
     @Column(nullable = false)
     private String password;
 
@@ -42,9 +48,10 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.role = Role.USER;
     }
     //비밀번호 암호화
-    //비밀번호 암호화
+
     public void encodePassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(this.password);
 

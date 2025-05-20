@@ -4,8 +4,8 @@ import com.example.user_service.domain.User;
 import com.example.user_service.dto.UserSignUpRequest;
 import com.example.user_service.global.ErrorCode;
 import com.example.user_service.global.exception.DuplicateUserException;
+import com.example.user_service.global.exception.NotFoundUserException;
 import com.example.user_service.repository.UserRepository;
-import com.example.user_service.security.SecurityConfig;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +33,13 @@ public class UserService {
         return userRepository.save(user).getId();
 
     }
+    //회원 조회
+    @Transactional(readOnly = true)
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundUserException(ErrorCode.NOT_FOUND_USER));
+    }
+
+
 
 
     //이미 존재하는 회원인지 확인

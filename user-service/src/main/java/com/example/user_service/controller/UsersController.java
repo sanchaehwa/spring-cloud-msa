@@ -1,5 +1,6 @@
 package com.example.user_service.controller;
 
+import com.example.user_service.dto.UserRequest;
 import com.example.user_service.dto.UserSignUpRequest;
 import com.example.user_service.global.response.ApiResponse;
 import com.example.user_service.service.UserService;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -41,6 +43,7 @@ public class UsersController {
         log.info("회원가입 성공 userId ={}", userId);
         return ResponseEntity.ok(new ApiResponse<>(userId));
         //return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
-
     }
+    //회원조회
+
 }
