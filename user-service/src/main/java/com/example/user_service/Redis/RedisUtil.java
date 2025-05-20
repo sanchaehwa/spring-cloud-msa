@@ -20,27 +20,7 @@ public class RedisUtil {
         log.info("RedisUtil 초기화됨: RedisTemplate = {}", redisTemplate);
     }
 
-    public void saveEmailCode(String email, String code) {
-        log.info("Redis 저장 시도 - email: {}, code: {}", email,code);
-    }
-    //유효 검증
-    public void saveVerifiedEmail(String email) {
-        redisTemplate.opsForValue().set("verified:" + email, "true", Duration.ofMinutes(10));  // 10분 유효
-    }
 
-    public boolean isVerifiedEmail(String email) {
-        String result = redisTemplate.opsForValue().get("verified:" + email);
-        return "true".equals(result);
-    }
-
-
-    public String getEmailCode(String email) {
-        return redisTemplate.opsForValue().get(email);
-    }
-
-    public void deleteEmailCode(String email) {
-        redisTemplate.delete(email);
-    }
     public void saveRefreshToken(String username, String refreshToken) {
         log.info("Redis 저장 시도 - user: {}. refreshToken: {}", username, refreshToken);
         redisTemplate.opsForValue().set("refresh:" + username,refreshToken);
@@ -51,4 +31,5 @@ public class RedisUtil {
     public void deleteRefreshToken(String username) {
         redisTemplate.delete("refresh:" + username);
     }
+
 }

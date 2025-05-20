@@ -8,9 +8,13 @@ import com.example.user_service.global.exception.NotFoundUserException;
 import com.example.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,13 +37,16 @@ public class UserService {
         return userRepository.save(user).getId();
 
     }
-    //회원 조회
+    //회원 조회(상세조회)
     @Transactional(readOnly = true)
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new NotFoundUserException(ErrorCode.NOT_FOUND_USER));
     }
-
-
+    //회원 전체 조회
+    @Transactional(readOnly = true)
+    public Page<User> findAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
 
 
     //이미 존재하는 회원인지 확인
