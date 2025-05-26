@@ -3,7 +3,7 @@ package com.example.user_service.jwt.security;
 
 import com.example.user_service.domain.User;
 import com.example.user_service.global.ErrorCode;
-import com.example.user_service.global.exception.NotFoundUserException;
+import com.example.user_service.exception.NotFoundUserException;
 import com.example.user_service.jwt.dto.CustomUserDetails;
 import com.example.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

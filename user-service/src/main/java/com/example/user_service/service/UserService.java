@@ -3,8 +3,8 @@ package com.example.user_service.service;
 import com.example.user_service.domain.User;
 import com.example.user_service.dto.UserSignUpRequest;
 import com.example.user_service.global.ErrorCode;
-import com.example.user_service.global.exception.DuplicateUserException;
-import com.example.user_service.global.exception.NotFoundUserException;
+import com.example.user_service.exception.DuplicateUserException;
+import com.example.user_service.exception.NotFoundUserException;
 import com.example.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -13,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
