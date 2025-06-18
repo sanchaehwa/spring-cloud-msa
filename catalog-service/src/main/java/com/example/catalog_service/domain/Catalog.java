@@ -2,6 +2,7 @@ package com.example.catalog_service.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,10 +24,19 @@ public class Catalog {
     @OneToMany(mappedBy = "catalog")
     private List<Product> products = new ArrayList<>();
 
+    @Column(columnDefinition = "TINYINT default 0")
+    private boolean isDeleted;
+
     public void addProduct(Product product) {
         products.add(product);
         product.addCatalog(this);
-        product.addCatalog(this);
+    }
+
+    @Builder
+    public Catalog(String categoryName, Boolean isDeleted) {
+       this.categoryName = categoryName;
+       this.isDeleted = isDeleted != null ? isDeleted : false;
+
     }
 
 }
