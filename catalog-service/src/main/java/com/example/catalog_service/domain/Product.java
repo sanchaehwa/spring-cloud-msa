@@ -33,12 +33,17 @@ public class Product {
     @org.hibernate.annotations.CreationTimestamp
     private Date created_at;
 
+    //삭제 여부
+    @Column(columnDefinition = "TINYINT default 0")
+    private boolean isDeleted;
+
     @Builder
-    public Product(Catalog catalog, String productName, Integer stock, Integer unitPrice) {
+    public Product(Catalog catalog, String productName, Integer stock, Integer unitPrice,Boolean isDeleted) {
         this.catalog = catalog;
         this.productName = productName;
         this.stock = stock;
         this.unitPrice = unitPrice;
+        this.isDeleted = isDeleted;
     }
 
     public void addCatalog(Catalog catalog) {
