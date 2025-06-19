@@ -1,7 +1,10 @@
 package com.example.catalog_service.global;
 
 import com.example.catalog_service.exception.DuplicateCatalogName;
+import com.example.catalog_service.exception.DuplicateProductException;
+import com.example.catalog_service.exception.ExistCategoryException;
 import com.example.catalog_service.global.exception.ApiException;
+import com.example.catalog_service.global.exception.DuplicateException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +35,17 @@ public class GlobalExceptionHandler {
                 ErrorCode.INVALID_INPUT, exception.getBindingResult());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(DuplicateCatalogName.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateException(DuplicateCatalogName exception) {
-        log.error("handleDuplicateCatalogNameException", exception);
-        ErrorResponse errorResponse = ErrorResponse.of(ErrorCode.DUPLICATE_CATALOG_EXCEPTION);
+    @ExceptionHandler({DuplicateCatalogName.class, DuplicateProductException.class})
+    public ResponseEntity<ErrorResponse> handleDuplicateException(DuplicateException exception) {
+        log.error("handleDuplicateException", exception);
+        ErrorResponse errorResponse = ErrorResponse.of(ErrorCode.CONFLICT_ERROR);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ExistCategoryException.class)
+    public ResponseEntity<ErrorResponse> handleCategoryException(ExistCategoryException exception) {
+        log.error("handleCategoryException", exception);
+        ErrorResponse errorResponse = ErrorResponse.of(ErrorCode.EXIST_CATALOG_EXCEPTION);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
 }

@@ -14,7 +14,12 @@ public enum ErrorCode {
     NOT_FOUND_RESOURCE("존재하지 않는 리소스입니다.", 404),
     CONFLICT_ERROR("중복된 값입니다.", 409),
 
-    DUPLICATE_CATALOG_EXCEPTION("이미 등록된 카테고리입니다",400);
+    //카테고리
+    DUPLICATE_CATALOG_EXCEPTION("이미 등록된 카테고리입니다",400),
+    EXIST_CATALOG_EXCEPTION("등록되어 있지 않은 카테고리입니다.",404),
+    //상품
+    DUPLICATE_PRODUCT_EXCEPTION("이미 등록된 상품입니다",400);
+
 
     private final String message;
     private final int status;

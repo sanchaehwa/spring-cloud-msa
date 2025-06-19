@@ -19,7 +19,7 @@ public class Product {
     @JoinColumn(name = "catalog_id")
     private Catalog catalog;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true,length =50)
     private String productName;
 
     @Column(nullable = false)

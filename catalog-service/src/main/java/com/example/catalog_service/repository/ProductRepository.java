@@ -23,5 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "where p.isDeleted = false")
     List<ProductDto> findAllProductDto();
 
+    boolean existsByProductNameAndIsDeletedFalse(String productName);
 
 }
