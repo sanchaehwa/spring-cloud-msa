@@ -24,7 +24,7 @@ public class ProductService {
     private final CatalogRepository catalogRepository;
 
     @Transactional
-    public void saveProduct(ProductSaveRequest productSaveRequest) {
+    public Long saveProduct(ProductSaveRequest productSaveRequest) {
         // 중복 상품명 검사
         validateProduct(productSaveRequest.getProductName());
 
@@ -34,7 +34,8 @@ public class ProductService {
 
         // Product 엔티티로 변환 및 저장
         Product product = productSaveRequest.toEntity(catalog);
-        productRepository.save(product);
+
+        return productRepository.save(product).getId();
     }
 
     // 중복 상품명 검사

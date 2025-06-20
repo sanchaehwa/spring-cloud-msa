@@ -3,6 +3,7 @@ package com.example.catalog_service.global;
 import com.example.catalog_service.exception.DuplicateCatalogName;
 import com.example.catalog_service.exception.DuplicateProductException;
 import com.example.catalog_service.exception.ExistCategoryException;
+import com.example.catalog_service.exception.ProductNotFoundException;
 import com.example.catalog_service.global.exception.ApiException;
 import com.example.catalog_service.global.exception.DuplicateException;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleCategoryException(ExistCategoryException exception) {
         log.error("handleCategoryException", exception);
         ErrorResponse errorResponse = ErrorResponse.of(ErrorCode.EXIST_CATALOG_EXCEPTION);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleProductNotFoundException(ProductNotFoundException exception) {
+        log.error("handleProductNotFoundException", exception);
+        ErrorResponse errorResponse = ErrorResponse.of(ErrorCode.NOT_FOUND_PRODUCT_EXCEPTION);
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 

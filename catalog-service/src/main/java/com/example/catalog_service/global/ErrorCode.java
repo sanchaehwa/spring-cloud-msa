@@ -18,7 +18,8 @@ public enum ErrorCode {
     DUPLICATE_CATALOG_EXCEPTION("이미 등록된 카테고리입니다",400),
     EXIST_CATALOG_EXCEPTION("등록되어 있지 않은 카테고리입니다.",404),
     //상품
-    DUPLICATE_PRODUCT_EXCEPTION("이미 등록된 상품입니다",400);
+    DUPLICATE_PRODUCT_EXCEPTION("이미 등록된 상품입니다",400),
+    NOT_FOUND_PRODUCT_EXCEPTION("존재 하지않는 상품입니다",404);
 
 
     private final String message;
