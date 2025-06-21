@@ -23,6 +23,6 @@ public class ProductDto {
         this.categoryName = categoryName;
         this.stock = stock;
         this.price = price;
-        this.isDeleted = isDeleted;
+        this.isDeleted = isDeleted != null ? isDeleted : false ;
     }
 }

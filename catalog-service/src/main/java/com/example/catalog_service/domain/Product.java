@@ -43,7 +43,7 @@ public class Product {
         this.productName = productName;
         this.stock = stock;
         this.unitPrice = unitPrice;
-        this.isDeleted = isDeleted;
+        this.isDeleted = isDeleted != null ? isDeleted : false;
     }
 
     public void addCatalog(Catalog catalog) {

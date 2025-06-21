@@ -18,19 +18,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product-service")
+@RequestMapping("/catalog-service")
 @RequiredArgsConstructor
 @Slf4j
 public class ProductController {
 
-    private final Environment env;
     private final ProductService productService;
 
-    @GetMapping("/health_check")
-    public ResponseEntity<ApiResponse<String>> status() {
-        String message = String.format("Product Service is running on port %s", env.getProperty("local.server.port"));
-        return ResponseEntity.ok(ApiResponse.success("서비스 정상 작동", message));
-    }
 
     @PostMapping("/products")
     @Operation(summary = "상품 등록", description = "새로운 상품을 등록합니다.")

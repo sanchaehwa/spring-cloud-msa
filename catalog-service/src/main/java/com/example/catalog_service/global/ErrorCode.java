@@ -15,10 +15,10 @@ public enum ErrorCode {
     CONFLICT_ERROR("중복된 값입니다.", 409),
 
     //카테고리
-    DUPLICATE_CATALOG_EXCEPTION("이미 등록된 카테고리입니다",400),
+    DUPLICATE_CATALOG_EXCEPTION("이미 등록된 카테고리입니다",409),
     EXIST_CATALOG_EXCEPTION("등록되어 있지 않은 카테고리입니다.",404),
     //상품
-    DUPLICATE_PRODUCT_EXCEPTION("이미 등록된 상품입니다",400),
+    DUPLICATE_PRODUCT_EXCEPTION("이미 등록된 상품입니다",409),
     NOT_FOUND_PRODUCT_EXCEPTION("존재 하지않는 상품입니다",404);
 
 

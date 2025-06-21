@@ -22,7 +22,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CatalogRepository catalogRepository;
-
+    //상품등록
     @Transactional
     public Long saveProduct(ProductSaveRequest productSaveRequest) {
         // 중복 상품명 검사
@@ -44,6 +44,7 @@ public class ProductService {
             throw new DuplicateProductException(ErrorCode.DUPLICATE_PRODUCT_EXCEPTION);
         }
     }
+    //상품 조회
     @Transactional(readOnly = true)
     public List<ProductDto> findAllProducts() {
         return productRepository.findAllProductDto();
