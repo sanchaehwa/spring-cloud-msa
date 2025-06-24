@@ -1,14 +1,16 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.1.4'
-    id 'io.spring.dependency-management' version '1.1.3'
+    id 'org.springframework.boot' version '3.4.7'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.example'
-version = '1.0'
+version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '17'
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 configurations {
@@ -22,7 +24,7 @@ repositories {
 }
 
 ext {
-    set('springCloudVersion', "2022.0.4")
+    set('springCloudVersion', "2024.0.1")
 }
 
 dependencies {
@@ -31,28 +33,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
-    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
-
-    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
-    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.3.1'
-
-    // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka
-    implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '3.1.0'
-
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-sleuth
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '1.0.0.RELEASE'
-
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-sleuth-zipkin
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version: '2.2.8.RELEASE'
-
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '3.1.5'
-    implementation 'io.micrometer:micrometer-registry-prometheus:1.0.0-rc.1'
-
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 dependencyManagement {
