@@ -39,13 +39,7 @@ logging:
     org.hibernate.SQL: debug
     com.example.userservice.client: DEBUG
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh, health, beans, busrefresh, info, metrics, prometheus
 
-
-#token:
-#  expiration_time: 86400000 # 1 day
-#  secret: testSecretKey20230327testSecretKey20230327testSecretKey20230327AgEgHeaEGragkajfAEGRGAAEERAEGEAKeyFallingInAndOut
+token:
+  expiration_time: 86400000 # 1 day
+  secret: q5lSYccKy4GWBm3sS3Kjnl+WvfwqqZy06EAlUOU9JbZRAgzY59lAR+RuJcBNRJD1diNUG10erVavEih4kkgGGw=
