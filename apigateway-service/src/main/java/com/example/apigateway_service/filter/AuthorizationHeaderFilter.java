@@ -30,13 +30,17 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
+            String path = exchange.getRequest().getURI().getPath();
+            if (path.contains("/login") || path.contains("/actuator")) {
+                return chain.filter(exchange);
+            }
 
-            ServerHttpRequest request = exchange.getRequest(); //토큰 검증
+            ServerHttpRequest request = exchange.getRequest();
             if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
                 return onError(exchange, "No Authorization Header.", HttpStatus.UNAUTHORIZED);
             }
 
-            String authorizationHeader = requireNonNull(request.getHeaders().get(HttpHeaders.AUTHORIZATION)).get(0); //정상적으로 로그인했을떄 전달받은 - 인증
+            String authorizationHeader = requireNonNull(request.getHeaders().get(HttpHeaders.AUTHORIZATION)).get(0);
             String jwt = authorizationHeader.replace("Bearer", "");
 
             if (!isJwtValid(jwt)) {

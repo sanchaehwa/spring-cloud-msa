@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.OrderedGatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.core.Ordered;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,6 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-
 public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Config> {
 
     public LoggingFilter() { //설정 클래스 등록
@@ -44,7 +44,7 @@ public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Co
                     log.info("Loggin POST Filter End: response id -> {}",response.getStatusCode());
                 }
             }));
-        }, OrderedGatewayFilter.LOWEST_PRECEDENCE); //우선순위설정 - Gateway 내의 우선순위를 정하는것이고 체인 순서대로면 Client -> Handler -> Global 이순으로 작동함 :
+        }, Ordered.HIGHEST_PRECEDENCE); //우선순위설정 - Gateway 내의 우선순위를 정하는것이고 체인 순서대로면 Client -> Handler -> Global 이순으로 작동함 :
         return filter;
     }
 

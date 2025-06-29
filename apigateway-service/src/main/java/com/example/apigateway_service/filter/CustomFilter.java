@@ -37,7 +37,6 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
             ServerHttpResponse response = exchange.getResponse();
 
             //Filter Logging 작업
-
             log.info("Custom PRE filter: request id -? {}",request.getId());
 
             //Custom Post Filter
