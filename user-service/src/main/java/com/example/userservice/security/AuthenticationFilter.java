@@ -37,6 +37,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		super.setAuthenticationManager(authenticationManager);
 		this.userService = userService;
 		this.env = env;
+		//필터가 로그인 요청을 가로채도록 설정
+		setFilterProcessesUrl("/login");
 	}
 
 	@Override
@@ -76,7 +78,18 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			.signWith(SignatureAlgorithm.HS256, requireNonNull(env.getProperty("token.secret")).getBytes())
 			.compact();
 
-		response.addHeader("token", token);
+		response.addHeader("token", token); //헤더로만 응답을 내러주고 있음
 		response.addHeader("userId", userDetails.getUserId());
+
+		//body에도 응답 표시
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		String responseBody = String.format(
+				"{\"token\":\"%s\", \"userId\":\"%s\"}",
+				token, userDetails.getUserId()
+		);
+		response.getWriter().write(responseBody);
+
 	}
 }

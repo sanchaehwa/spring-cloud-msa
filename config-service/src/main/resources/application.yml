@@ -15,3 +15,8 @@ spring:
 #          password: [your password]
 
 
+management:
+  endpoint:
+    web:
+      exposure:
+        include: health, busrefresh
