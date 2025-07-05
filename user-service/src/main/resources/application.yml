@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: user-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -43,7 +49,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans,httptrace
+        include: refresh, health, beans,httptrace,busrefresh
 
 #beans : 스프링 애플리케이션 컨텍스트에 등록된 모든 빈을 나열
 #health : 애플리케이션 현재 작동 상태 정보를 확인 (DB , Redis, Kafka )등 의존하는 외부 시스템 연결 상태도 함께 확인이 간으
